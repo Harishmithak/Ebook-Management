@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('category',[BooksController::class,'index']);
+
+
+Route::get('/books/book/{category_id}', 'App\Http\Controllers\BooksController@show')->name('books.show');
+
+
