@@ -27,4 +27,7 @@ Route::get('category',[BooksController::class,'index']);
 
 Route::get('/books/book/{category_id}', 'App\Http\Controllers\BooksController@show')->name('books.show');
 
+Route::post('/books/book', 'App\Http\Controllers\BooksController@store')->name('books.store');
+
+
 
