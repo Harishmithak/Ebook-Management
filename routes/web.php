@@ -24,10 +24,15 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('category',[BooksController::class,'index']);
 
+Route::get('books',[BooksController::class,'index1']);
 
 Route::get('/books/book/{category_id}', 'App\Http\Controllers\BooksController@show')->name('books.show');
 
 Route::post('/books/book', 'App\Http\Controllers\BooksController@store')->name('books.store');
 
+Route::get('/books/{id}/edit', 'App\Http\Controllers\BooksController@edit')->name('books.edit');
 
 
+Route::put('/books/{id}', 'App\Http\Controllers\BooksController@update')->name('books.update');
+
+Route::delete('/books/{id}','App\Http\Controllers\BooksController@destroy')->name('books.destroy');
