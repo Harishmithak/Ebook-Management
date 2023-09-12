@@ -28,7 +28,7 @@ class BooksController extends Controller
         $category = category::find($category_id);
         $books = book::where('category_id', $category_id)->get();
         $categories = category::all(); 
-        return view('books.book', compact('books', 'categories')); 
+        return view('books.userbook', compact('books', 'categories')); 
     }
 
 
@@ -46,6 +46,10 @@ class BooksController extends Controller
         if ($request->hasFile('book_image')) {
             $validatedData['book_image'] = $request->file('book_image')->store('book_images', 'public');
         }
+        
+    if ($request->hasFile('pdf')) {
+        $validatedData['pdf'] = $request->file('pdf')->store('pdfs', 'public'); 
+    }
     
         $book= book::create($validatedData); 
     }
@@ -70,11 +74,12 @@ class BooksController extends Controller
     if ($request->hasFile('book_image')) {
         
         Storage::delete('storage/' . $book->book_image);
-
-      
         $validatedData['book_image'] = $request->file('book_image')->store('book_images', 'public');
     }
-
+    if ($request->hasFile('pdf')) {
+        Storage::delete('storage/' . $book->pdf); 
+        $validatedData['pdf'] = $request->file('pdf')->store('pdfs', 'public'); 
+    }
     $book->update($validatedData);
 
     return redirect('category');

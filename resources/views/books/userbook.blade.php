@@ -1,39 +1,73 @@
 @extends('layouts.app')
 @section('content')
 <body>
-    
-
+<div class="container">
+    <h1>
+         
+    </h1>
+    <ul class="list-group">
+       
+            <li class="list-group-item book-item">
+                <div class="row align-items-center">
+                    @foreach($books as $book)
+                    <div class="col-md-3">
+                    <img src="{{asset('storage/'.$book->book_image)}}" alt="" class="img-thumbnail" >
+                    </div>
+                    <div class="col-md-3">
+                        <h4>{{ $book->title }}</h4>
+                        <p><strong >Author:</strong> {{ $book->author }}</p>
+                        <p><strong >Published Year:</strong> {{ $book->published_year }}</p>
+                        @if ($book->pdf)
+                        <button class="custom-btn btn-7 shadow-none" ><span> <a id="view-btn" href="{{asset('storage/'.$book->pdf)}}" >Read Book</a></span></button>  
+                        @else
+                            <span class="text-muted" style="color: #95a5a6;">PDF not available</span><br>
+                        @endif
+                    </div> @endforeach
+                </div>
+            </li>
+       
+    </ul>
+</div>
+</body>
+{{-- <body>
 <div class="container">
     <h1>
          
     </h1>
     <div class="row">
-        @foreach($categories as $category)
+        @foreach($books as $book)
      <div class="col-md-4 mb-4">
                 <div class="card">
-                    <img src="{{ $category->category_image}}" class="card-img" >
+                    <img src="{{asset('storage/'.$book->book_image)}}" class="card-img" >
                     <div class="card-body">
-                        <h5 class="card-title">{{ $category->category_name }}</h5> 
-                        <button class="custom-btn btn-7"><span><a class="shadow-none" id="view-btn" href="{{ route('books.show', ['category_id' => $category->id]) }}">View Books</a></span></button>                    </div>
+                        <h5 class="card-title">{{ $book->title }}</h5> 
+                        <h5 class="card-title">{{ $book->author }}</h5> 
+                        <h5 class="card-title">{{ $book->published_year }}</h5> 
+                        @if ($book->pdf)
+                        <button class="custom-btn btn-7"><span> <a href="{{asset('storage/'.$book->pdf)}}" class="btn" >Read Book</a></span></button>  
+                        @else
+                        <span class="text-muted" style="color: #95a5a6;">PDF not available</span><br>
+                    @endif         
+                         </div>
                 </div>
             </div>
         @endforeach
     </div>
 </div>
-</body>
+</body> --}}
 <style>
-    .card-img {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-}
-body{
+    body{
     background-color: #0D1F2D;
     font-family: 'Kanit', sans-serif;
 }
-    .card-body{
+.card-body{
         background-color: #e0e0e0;
     }
+    .card-img {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
 #view-btn{
     text-decoration: none;
     color:white;
@@ -136,4 +170,5 @@ background: linear-gradient(0deg, #4a9d9c 0%, #0D6E6E 100%);
 }
 
 </style>
-@endsection
+@endsection;
+

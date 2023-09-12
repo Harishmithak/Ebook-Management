@@ -6,18 +6,22 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="icon" type="image/x-icon" href="https://bookopolis.com/img/newdesign/logo@2x.png">
+  <link rel="icon" type="image/x-icon" href="https://o.remove.bg/downloads/92dae42e-2198-4a13-9bdf-2b94ecec63a7/book-logo-removebg-preview.png">
     <title>Bookopolis</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+{{-- google font --}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     <!-- Scripts -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+{{-- jquery --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
 
@@ -31,7 +35,7 @@
         <nav class="navbar navbar-expand-md  shadow-sm">
             <div class="container">
             
-               <img  class="navbar-brand" src="https://bookopolis.com/img/newdesign/logo@2x.png" style="height:100px;width:100px" >
+               <img  class="navbar-brand" src="https://cdn-icons-png.flaticon.com/128/11515/11515485.png" width="5%" >
            
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -40,13 +44,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-@can('create',App\Models\book::class)
+                    @can('create',App\Models\book::class)
                         <li>
-                            <a href="books">Book details</a>
+                            <a href="books" style='text-decoration:none;color:black'>Book details</a>
                         </li>
                      @endcan
-           
+                            <li class="ms-3">
+                     <a href="/category" style='text-decoration:none;color:black'> categories</a>
+                    </li>
                     </ul>
+                     
+              
+                  
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -87,15 +96,16 @@
             </div>
       
         </nav>
-        <main class="py-4">
+        {{-- <main class="py-4"> --}}
             @yield('content')
-        </main>
+        {{-- </main> --}}
     </div>
     
 </body>
 </html>
 <style>
 .navbar{
-    background-color:burlywood;
+    /* background:  linear-gradient(to right, #093637, #44a08d); */
+    background-color: #0D6E6E;
 }
 </style>

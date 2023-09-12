@@ -33,7 +33,7 @@
 @section('content')
 {{-- @can('create',App\Models\book::class); --}}
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addBookModal">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addBookModal" style='margin-left:1252px'>
         Add Book
     </button>
     {{-- @endcan --}}
@@ -48,9 +48,7 @@
                 <th>Book Image</th>
                 <th>PDF</th>
                
-                <th>Edit</th>
-                 
-                     
+                <th>Edit</th>              
                 <th>Delete</th>
           
         
@@ -67,13 +65,14 @@
                         <img src="{{ asset('storage/'.$book->book_image) }}" alt="{{ $book->title }}" class="img-thumbnail" width="100">
                     </td>
                     <td>
+                
                         @if ($book->pdf)
-                            <a href="{{ $book->pdf }}" target="_blank">View PDF</a>
+                               <a href="{{ asset('storage/'.$book->pdf) }}" target="_blank">View Book</a>
                         @else
                             N/A
                         @endif
                     </td>
-          
+         
                     <td>
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary">Edit</a>
                     </td>
