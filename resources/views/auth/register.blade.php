@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<body class='register'>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -74,4 +75,15 @@
         </div>
     </div>
 </div>
+</body>
 @endsection
+
+
+
+<style>
+    .register{
+    background-color: #0D1F2D;
+   
+}
+
+</style>

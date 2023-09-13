@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<body class='login'>
+<div class="container ">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -70,4 +71,15 @@
         </div>
     </div>
 </div>
+
 @endsection
+
+
+
+<style>
+    .login{
+    background-color: #0D1F2D;
+   
+}
+
+</style>

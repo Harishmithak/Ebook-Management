@@ -18,7 +18,9 @@ use App\Http\Controllers\BooksController;
 //     return view('welcome');
 // });
 
-Auth::routes();
+Auth::routes([
+    "verify" => true,
+]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

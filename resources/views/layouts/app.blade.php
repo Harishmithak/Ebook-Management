@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="icon" type="image/x-icon" href="https://o.remove.bg/downloads/92dae42e-2198-4a13-9bdf-2b94ecec63a7/book-logo-removebg-preview.png">
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/128/11515/11515485.png">
     <title>Bookopolis</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -17,6 +17,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+{{-- Home page banner font --}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     <!-- Scripts -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -46,11 +50,11 @@
                     <ul class="navbar-nav me-auto">
                     @can('create',App\Models\book::class)
                         <li>
-                            <a href="books" style='text-decoration:none;color:black'>Book details</a>
+                            <a href="books" style='text-decoration:none;color:rgb(243, 238, 238);' id='menu'>Book details</a>
                         </li>
                      @endcan
                             <li class="ms-3">
-                     <a href="/category" style='text-decoration:none;color:black'> categories</a>
+                     <a href="/category" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'> Categories</a>
                     </li>
                     </ul>
                      
@@ -62,19 +66,19 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li class="nav-item" id='menu'>
+                                    <a class="nav-link" href="{{ route('login') }}"  id='menu'>{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li class="nav-item" >
+                                    <a class="nav-link" href="{{ route('register') }}"  id='menu'>{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown"    class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -85,7 +89,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"  id='menu'>
                                         @csrf
                                     </form>
                                 </div>
@@ -107,5 +111,16 @@
 .navbar{
     /* background:  linear-gradient(to right, #093637, #44a08d); */
     background-color: #0D6E6E;
+}
+#menu{
+    font-family: 'Concert One', cursive;
+    font-size: 23px;
+    color: white;
+}
+
+#navbarDropdown{
+color: white;
+font-family: 'Concert One', cursive;
+font-size: 23px;
 }
 </style>
