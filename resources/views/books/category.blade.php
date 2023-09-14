@@ -28,7 +28,7 @@
     object-fit: cover;
 }
 body{
-    background-color: #0D1F2D;
+    background-color: #95d1c2;
     font-family: 'Kanit', sans-serif;
 }
     .card-body{

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,13 @@ Route::put('/books/{id}', 'App\Http\Controllers\BooksController@update')->name('
 Route::delete('/books/{id}','App\Http\Controllers\BooksController@destroy')->name('books.destroy');
 
 Route::view('books/userbook', 'books.userbook')->name('books.userbook');
+
+Route::post('/subscription/form', 'App\Http\Controllers\SubscriptionController@subscribe')->name('subscription.subscribe');
+
+Route::get('subscribeform', function () {
+    return view('subscription.form');
+});
+// Route::get('premiumcategory', function () {
+//     return view('premium.category');
+// });
+Route::get('premiumbook',[SubscriptionController::class,'index']);

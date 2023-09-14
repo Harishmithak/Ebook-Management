@@ -48,6 +48,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <li class="ms-3">
+                            <a href="/" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'>Home</a>
+                           </li>
                     @can('create',App\Models\book::class)
                         <li>
                             <a href="books" style='text-decoration:none;color:rgb(243, 238, 238);' id='menu'>Book details</a>
@@ -56,6 +59,12 @@
                             <li class="ms-3">
                      <a href="/category" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'> Categories</a>
                     </li>
+                    <li class="ms-3">
+                        <a href="/subscribeform" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'>subscription</a>
+                       </li>
+                       <li class="ms-3">
+                        <a href="/premiumbook" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'><img class='menu-image' src="{{ asset('images/premium.png') }}"alt="Image">premium books</a>
+                       </li>
                     </ul>
                      
               
@@ -113,14 +122,19 @@
     background-color: #0D6E6E;
 }
 #menu{
-    font-family: 'Concert One', cursive;
-    font-size: 23px;
+    font-family: 'Lato', sans-serif;
+    font-size: 19px;
     color: white;
 }
 
 #navbarDropdown{
 color: white;
-font-family: 'Concert One', cursive;
-font-size: 23px;
+font-family: 'Lato', sans-serif;
+font-size: 19px;
 }
+.menu-image {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 10px;
+    vertical-align: middle; }
 </style>

@@ -41,4 +41,17 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function subscription()
+{
+    return $this->hasOne(Subscription::class);
+}
+public function subscriptions()
+{
+    return $this->hasMany(Subscription::class);
+}
+
+public function isSubscribed()
+{
+    return $this->subscriptions()->where('subscribe_status', 1)->exists();
+}
 }
