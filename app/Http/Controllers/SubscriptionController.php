@@ -39,7 +39,6 @@ class SubscriptionController extends Controller
 
         if (!$user || !$user->isSubscribed()) {
             return redirect('subscribeform')->with('error', 'You need to subscribe to access premium content.');
-
         }
         $premiumcategories = premiumcategory::all();
       
