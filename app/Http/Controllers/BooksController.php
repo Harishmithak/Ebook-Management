@@ -7,7 +7,7 @@ use App\Models\book;
 use App\Models\category;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\premiumcategory;
 
 class BooksController extends Controller
 {
@@ -15,6 +15,7 @@ class BooksController extends Controller
     {
         $categories = category::all();
         $books = book::all();
+       
         return view('books.category', compact('categories','books'));
     }
     public function index1()
@@ -23,6 +24,7 @@ class BooksController extends Controller
         $books = book::all();
         return view('books.book', compact('books','categories'));
     }
+
     public function show($category_id)
     {
         $category = category::find($category_id);

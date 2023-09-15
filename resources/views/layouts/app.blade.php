@@ -52,18 +52,25 @@
                             <a href="/" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'>Home</a>
                            </li>
                     @can('create',App\Models\book::class)
-                        <li>
-                            <a href="books" style='text-decoration:none;color:rgb(243, 238, 238);' id='menu'>Book details</a>
+                        <li class="ms-3">
+                            <a href="books" style='text-decoration:none;color:rgb(19, 15, 15);' id='menu'>Book</a>
                         </li>
                      @endcan
+
+                     @can('create',App\Models\book::class)
+                     <li class="ms-3">
+                        <a href="premium" style='text-decoration:none;color:rgb(22, 21, 21);' id='menu'>PremiumBook</a>
+                    </li>
+                    
+                  @endcan
                             <li class="ms-3">
                      <a href="/category" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'> Categories</a>
                     </li>
                     <li class="ms-3">
-                        <a href="/subscribeform" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'>subscription</a>
+                        <a href="/subscribeform" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'>Subscription</a>
                        </li>
                        <li class="ms-3">
-                        <a href="/premiumbook" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'><img class='menu-image' src="{{ asset('images/premium.png') }}"alt="Image">premium books</a>
+                        <a href="/premiumcategory" style='text-decoration:none;color:rgb(252, 249, 249)' id='menu'><img class='menu-image' src="{{ asset('images/premium.png') }}"alt="Image">Premium</a>
                        </li>
                     </ul>
                      

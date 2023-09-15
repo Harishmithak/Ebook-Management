@@ -2,10 +2,9 @@
 @extends('layouts.app')
 @section('content')
 
-
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addBookModal" style='margin-left:1252px'>
+ <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addBookModal" style='margin-left:1252px'>
         Add Book
-    </button>
+    </button> 
 
 <div class="container">
     <table class="table table-bordered">
@@ -24,12 +23,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($books as $book)
+            @foreach($premiumbooks as $book)
                 <tr>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author }}</td>
                     <td>{{ $book->published_year }}</td>
-                    <td>{{ $book->category->category_name }}</td>
+                    <td>{{ $book->premiumcategory->category_name}}</td>
                     <td>
                         <img src="{{ asset('storage/'.$book->book_image) }}" alt="{{ $book->title }}" class="img-thumbnail" width="100">
                     </td>
@@ -43,11 +42,11 @@
                     </td>
          
                     <td>
-                        <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('premiumbooks.edit', $book->id) }}" class="btn btn-primary">Edit</a>
                     </td>
   
                     <td>
-                        <form action="{{ route('books.destroy', $book->id) }}" method="POST">
+                        <form action="{{ route('premiumbooks.destroy', $book->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -73,7 +72,7 @@
             </div>
             <div class="modal-body">
  
-              <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('premiumbooks.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -95,7 +94,7 @@
   <div class="col-sm-10">
   <select name="category_id" id="book">
       <option value="category_id" disabled> Select category </option>
-      @foreach($categories as $category)
+      @foreach($premiumcategories as $category)
           <option value="{{$category->id}}"> {{$category->category_name}} </option>
       @endforeach
   </select>
