@@ -47,17 +47,8 @@ Route::post('/subscription/form', 'App\Http\Controllers\SubscriptionController@s
 Route::get('subscribeform', function () {
     return view('subscription.form');
 });
-// Route::get('premiumcategory', function () {
-//     return view('premium.category');
-// });
-
- Route::get('premiumcategory',[SubscriptionController::class,'index']);
- Route::get('/premium/premiumbook/{category_id}', 'App\Http\Controllers\SubscriptionController@show')->name('premiumbooks.show');
- Route::post('/premium/premiumbook', 'App\Http\Controllers\SubscriptionController@store')->name('premiumbooks.store');
- Route::delete('/premium/{id}','App\Http\Controllers\SubscriptionController@destroy')->name('premiumbooks.destroy');
- 
-Route::get('/premium/{id}/premiumedit', 'App\Http\Controllers\SubscriptionController@edit')->name('premiumbooks.edit');
+Route::post('/subscription/create', 'App\Http\Controllers\SubscriptionController@subscribe')->name('subscription.subscribe');
 
 
-Route::put('/premium/{id}', 'App\Http\Controllers\SubscriptionController@update')->name('premiumbooks.update');
-Route::get('premium',[SubscriptionController::class,'index1']);
+
+

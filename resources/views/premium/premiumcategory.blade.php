@@ -7,14 +7,14 @@
     <h1>
          
     </h1>
-    <div class="row"></div>
-        @foreach($premiumcategories as $category)
+    <div class="row">
+        @foreach($categories as $category)
      <div class="col-md-4 mb-4">
                 <div class="card">
                     <img src="{{ $category->category_image}}" class="card-img" >
                     <div class="card-body">
                         <h5 class="card-title">{{ $category->category_name }}</h5> 
-                        <button class="custom-btn btn-7"><span><a class="shadow-none" id="view-btn" href="{{ route('premiumbooks.show', ['category_id' => $category->id]) }}">View Books</a></span></button>                    </div>
+                        <button class="custom-btn btn-7"><span><a class="shadow-none" id="view-btn" href="{{ route('books.show', ['category_id' => $category->id]) }}">View Books</a></span></button>                    </div>
                 </div>
             </div>
         @endforeach

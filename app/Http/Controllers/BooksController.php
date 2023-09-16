@@ -5,33 +5,55 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\book;
 use App\Models\category;
+use App\Models\User;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\premiumcategory;
-
+use App\Models\Subscription;
 class BooksController extends Controller
 {
     public function index()
     {
         $categories = category::all();
         $books = book::all();
+        
        
         return view('books.category', compact('categories','books'));
     }
     public function index1()
     {
+  
         $categories = category::all();
         $books = book::all();
         return view('books.book', compact('books','categories'));
     }
 
+
     public function show($category_id)
     {
         $category = category::find($category_id);
-        $books = book::where('category_id', $category_id)->get();
-        $categories = category::all(); 
-        return view('books.userbook', compact('books', 'categories')); 
+        $categories = category::all();
+    
+       
+        // $user = auth()->user();
+        // $isSubscribed = $user && $user->isSubscribed();
+  
+        // if ($isSubscribed) {
+            $books = book::where('category_id', $category_id)->get();
+        // } else {
+        //     $books = book::where('category_id', $category_id)
+        //         ->where('booktype', 'Non premium')
+        //         ->get();
+        // }
+    
+        return view('books.userbook', compact('books', 'categories'));
     }
+    
+  
+
+
+    
+
 
 
     public function store(Request $request)
@@ -44,6 +66,7 @@ class BooksController extends Controller
             'category_id' => 'required|integer',
             'book_image' =>'sometimes|file|image|max:10000', 
             'pdf' => 'nullable|file|mimes:pdf|max:2048', 
+            'booktype' => 'required|string|max:255',
         ]);
         if ($request->hasFile('book_image')) {
             $validatedData['book_image'] = $request->file('book_image')->store('book_images', 'public');
@@ -98,6 +121,7 @@ class BooksController extends Controller
             'category_id' => 'required|integer|exists:categories,id',
             'book_image' => 'sometimes|file|image|max:10000', 
             'pdf' => 'nullable|file|mimes:pdf|max:2048', 
+            'booktype' => 'required|string|max:255',
         ]);
     }
     public function destroy($id){

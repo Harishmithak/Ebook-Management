@@ -15,6 +15,7 @@ class book extends Model
         'category_id',
         'book_image',
         'pdf',
+        'booktype',
     ];
     
     public function category(){

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->string('book_image');
             $table->string('pdf')->nullable();
+            $table->string('booktype');
             $table->timestamps();
         });
     }

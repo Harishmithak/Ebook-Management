@@ -41,7 +41,10 @@
             <label for="pdf">PDF</label>
             <input type="file" class="form-control-file" id="pdf" name="pdf">
         </div>
-
+        <div class="form-group">
+            <label for="booktype">Book Type</label>
+            <input type="text" class="form-control" id="title" name="booktype" value="{{ $book->booktype }}">
+        </div>
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
 </div>

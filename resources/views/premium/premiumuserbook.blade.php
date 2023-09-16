@@ -2,33 +2,35 @@
 @section('content')
 <body>
 <div class="container">
-    <h1>
-         
-    </h1>
+    <h1></h1>
     <ul class="list-group">
-       
-            <li class="list-group-item book-item">
-                <div class="row align-items-center">
-                    @foreach($premiumbooks as $book)
-                    <div class="col-md-3">
-                    <img src="{{asset('storage/'.$book->book_image)}}" alt="" class="img-thumbnail" >
+        @foreach($premiumBooks as $book)
+    
+                <li class="list-group-item book-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <img src="{{ asset('storage/' . $book->book_image) }}" alt="" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-3">
+                            <h4>{{ $book->title }}</h4>
+                            <p><strong>Author:</strong> {{ $book->author }}</p>
+                            <p><strong>Published Year:</strong> {{ $book->published_year }}</p>
+                            @if ($book->pdf)
+                                <button class="custom-btn btn-7 shadow-none"><span><a
+                                            id="view-btn" href="{{ asset('storage/' . $book->pdf) }}">Read Book</a></span>
+                                </button>
+                            @else
+                                <span class="text-muted" style="color: #95a5a6;">PDF not available</span><br>
+                            @endif
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <h4>{{ $book->title }}</h4>
-                        <p><strong >Author:</strong> {{ $book->author }}</p>
-                        <p><strong >Published Year:</strong> {{ $book->published_year }}</p>
-                        @if ($book->pdf)
-                        <button class="custom-btn btn-7 shadow-none" ><span> <a id="view-btn" href="{{asset('storage/'.$book->pdf)}}" target="_blank" >Read Book</a></span></button>  
-                        @else
-                            <span class="text-muted" style="color: #95a5a6;">PDF not available</span><br>
-                        @endif
-                    </div> @endforeach
-                </div>
-            </li>
-       
+                </li>
+           
+        @endforeach
     </ul>
 </div>
 </body>
+
 <style>
     body{
     background-color: #0D1F2D;
@@ -145,3 +147,4 @@ background: linear-gradient(0deg, #4a9d9c 0%, #0D6E6E 100%);
 
 </style>
 @endsection;
+

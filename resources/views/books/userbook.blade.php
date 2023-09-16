@@ -2,59 +2,46 @@
 @section('content')
 <body>
 <div class="container">
-    <h1>
-         
-    </h1>
+    <h1></h1>
     <ul class="list-group">
-       
+        @foreach($books as $book)
             <li class="list-group-item book-item">
                 <div class="row align-items-center">
-                    @foreach($books as $book)
                     <div class="col-md-3">
-                    <img src="{{asset('storage/'.$book->book_image)}}" alt="" class="img-thumbnail" >
+                        <img src="{{ asset('storage/' . $book->book_image) }}" alt="" class="img-thumbnail">
                     </div>
                     <div class="col-md-3">
                         <h4>{{ $book->title }}</h4>
-                        <p><strong >Author:</strong> {{ $book->author }}</p>
-                        <p><strong >Published Year:</strong> {{ $book->published_year }}</p>
+                        <p><strong>Author:</strong> {{ $book->author }}</p>
+                        <p><strong>Published Year:</strong> {{ $book->published_year }}</p>
+
                         @if ($book->pdf)
-                        <button class="custom-btn btn-7 shadow-none" ><span> <a id="view-btn" href="{{asset('storage/'.$book->pdf)}}" >Read Book</a></span></button>  
+                            @auth
+                                @if (!auth()->user()->isSubscribed() && $book->booktype === 'Premium')
+                                    <a href="/subscribeform" class="custom-btn btn-7 shadow-none">
+                                        <span>Subscribe to Read</span>
+                                    </a>
+                                @else
+                                    <a href="{{ asset('storage/' . $book->pdf) }}" class="custom-btn btn-7 shadow-none">
+                                        <span>Read Book</span>
+                                    </a>
+                                @endif
+                            @else
+                                <a href="{{ route('login') }}" class="custom-btn btn-7 shadow-none">
+                                    <span>Login to Read</span>
+                                </a>
+                            @endauth
                         @else
                             <span class="text-muted" style="color: #95a5a6;">PDF not available</span><br>
                         @endif
-                    </div> @endforeach
+                    </div>
                 </div>
             </li>
-       
+        @endforeach
     </ul>
 </div>
 </body>
-{{-- <body>
-<div class="container">
-    <h1>
-         
-    </h1>
-    <div class="row">
-        @foreach($books as $book)
-     <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="{{asset('storage/'.$book->book_image)}}" class="card-img" >
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $book->title }}</h5> 
-                        <h5 class="card-title">{{ $book->author }}</h5> 
-                        <h5 class="card-title">{{ $book->published_year }}</h5> 
-                        @if ($book->pdf)
-                        <button class="custom-btn btn-7"><span> <a href="{{asset('storage/'.$book->pdf)}}" class="btn" >Read Book</a></span></button>  
-                        @else
-                        <span class="text-muted" style="color: #95a5a6;">PDF not available</span><br>
-                    @endif         
-                         </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-</body> --}}
+
 <style>
     body{
     background-color: #0D1F2D;
@@ -93,7 +80,9 @@
    7px 7px 20px 0px rgba(0,0,0,.1),
    4px 4px 5px 0px rgba(0,0,0,.1);
   outline: none;
+  text-decoration: none;
 }
+
 
    /* 7 */
 .btn-7 {
