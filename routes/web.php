@@ -38,8 +38,11 @@ Route::get('/books/{id}/edit', 'App\Http\Controllers\BooksController@edit')->nam
 
 Route::put('/books/{id}', 'App\Http\Controllers\BooksController@update')->name('books.update');
 
-Route::delete('/books/{id}','App\Http\Controllers\BooksController@destroy')->name('books.destroy');
+// Route::delete('/books/{id}','App\Http\Controllers\BooksController@destroy')->name('books.destroy');
 
+Route::delete('/books/sd/{id}','App\Http\Controllers\BooksController@softDelete')->name('books.destroy');
+// Route::get('/books/restore/{id}','App\Http\Controllers\BooksController@restore')->name('books.restore');
+Route::get('/books/restore','App\Http\Controllers\BooksController@restore')->name('books.restore');
 Route::view('books/userbook', 'books.userbook')->name('books.userbook');
 
 Route::post('/subscription/form', 'App\Http\Controllers\SubscriptionController@subscribe')->name('subscription.subscribe');
@@ -48,7 +51,8 @@ Route::get('subscribeform', function () {
     return view('subscription.form');
 });
 Route::post('/subscription/create', 'App\Http\Controllers\SubscriptionController@subscribe')->name('subscription.subscribe');
+Route::delete('/books/fd/{id}','App\Http\Controllers\BooksController@forceDelete')->name('books.delete');
+// Route::post('books/restore/{id}', 'App\Http\Controllers\BooksController@restore')->name('books.restore');
 
-
-
+//  Route::get('/subscribeform', 'App\Http\Controllers\SubscriptionController@index');
 

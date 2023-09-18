@@ -76,6 +76,32 @@
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="modal"]').modal();
+
+        $('form').submit(function(event) {
+            event.preventDefault(); 
+
+            const form = this; 
+
+            Swal.fire({
+                text: 'Registered successfully!',
+                toast: true,
+                icon: 'success',
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000
+            }).then((result) => {
+   
+        form.submit();
+    
+});
+
+            
+        });
+    });
+</script>
 @endsection
 
 

@@ -48,4 +48,28 @@
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
 </div>
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="modal"]').modal();
+        $('form').submit(function(event) {
+            event.preventDefault(); 
+
+            const form = this; 
+
+            Swal.fire({
+                title: 'Are you sure want to edit?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
 @endsection
+

@@ -22,7 +22,7 @@
                                         <span>Subscribe to Read</span>
                                     </a>
                                 @else
-                                    <a href="{{ asset('storage/' . $book->pdf) }}" class="custom-btn btn-7 shadow-none">
+                                    <a href="{{ asset('storage/' . $book->pdf) }}" class="custom-btn btn-7 shadow-none" target="_blank">
                                         <span>Read Book</span>
                                     </a>
                                 @endif

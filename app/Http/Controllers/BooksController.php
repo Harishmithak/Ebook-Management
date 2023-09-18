@@ -10,22 +10,24 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\premiumcategory;
 use App\Models\Subscription;
+
 class BooksController extends Controller
 {
     public function index()
     {
         $categories = category::all();
-        $books = book::all();
-        
-       
-        return view('books.category', compact('categories','books'));
+        // $books = book::all();
+
+        $books = book::paginate(1);
+        return view('books.category', compact('categories', 'books'));
     }
     public function index1()
     {
-  
+
         $categories = category::all();
-        $books = book::all();
-        return view('books.book', compact('books','categories'));
+        // $books = book::all();
+        $books = book::paginate(1);
+        return view('books.book', compact('books', 'categories'));
     }
 
 
@@ -33,26 +35,13 @@ class BooksController extends Controller
     {
         $category = category::find($category_id);
         $categories = category::all();
-    
-       
-        // $user = auth()->user();
-        // $isSubscribed = $user && $user->isSubscribed();
-  
-        // if ($isSubscribed) {
-            $books = book::where('category_id', $category_id)->get();
-        // } else {
-        //     $books = book::where('category_id', $category_id)
-        //         ->where('booktype', 'Non premium')
-        //         ->get();
-        // }
-    
+
+        $books = Book::where('category_id', $category_id)
+            ->get();
+
+
         return view('books.userbook', compact('books', 'categories'));
     }
-    
-  
-
-
-    
 
 
 
@@ -64,54 +53,55 @@ class BooksController extends Controller
             'author' => 'required|string|max:255',
             'published_year' => 'required|integer',
             'category_id' => 'required|integer',
-            'book_image' =>'sometimes|file|image|max:10000', 
-            'pdf' => 'nullable|file|mimes:pdf|max:2048', 
+            'book_image' => 'sometimes|file|image|max:10000',
+            'pdf' => 'nullable|file|mimes:pdf|max:2048',
             'booktype' => 'required|string|max:255',
         ]);
         if ($request->hasFile('book_image')) {
             $validatedData['book_image'] = $request->file('book_image')->store('book_images', 'public');
         }
-        
-    if ($request->hasFile('pdf')) {
-        $validatedData['pdf'] = $request->file('pdf')->store('pdfs', 'public'); 
-    }
-    
-        $book= book::create($validatedData); 
+
+        if ($request->hasFile('pdf')) {
+            $validatedData['pdf'] = $request->file('pdf')->store('pdfs', 'public');
+        }
+
+        $book = book::create($validatedData);
+        session()->flash('success', 'Book created successfully.');
     }
 
 
     public function edit($id)
     {
         $book = book::find($id);
-        $categories = category::all(); 
-    
+        $categories = category::all();
+
         return view('books.edit', compact('book', 'categories'));
     }
 
 
     public function update(Request $request, $id)
-{
-    
-    $book = Book::find($id);
- 
-    $validatedData = $this->validateRequest();
+    {
 
-    if ($request->hasFile('book_image')) {
-        
-        Storage::delete('storage/' . $book->book_image);
-        $validatedData['book_image'] = $request->file('book_image')->store('book_images', 'public');
+        $book = Book::find($id);
+
+        $validatedData = $this->validateRequest();
+
+        if ($request->hasFile('book_image')) {
+
+            Storage::delete('storage/' . $book->book_image);
+            $validatedData['book_image'] = $request->file('book_image')->store('book_images', 'public');
+        }
+        if ($request->hasFile('pdf')) {
+            Storage::delete('storage/' . $book->pdf);
+            $validatedData['pdf'] = $request->file('pdf')->store('pdfs', 'public');
+        }
+        $book->update($validatedData);
+
+        return redirect('category');
     }
-    if ($request->hasFile('pdf')) {
-        Storage::delete('storage/' . $book->pdf); 
-        $validatedData['pdf'] = $request->file('pdf')->store('pdfs', 'public'); 
-    }
-    $book->update($validatedData);
-
-    return redirect('category');
-}
 
 
-    
+
     private function validateRequest()
     {
         return request()->validate([
@@ -119,16 +109,40 @@ class BooksController extends Controller
             'author' => 'required|string|max:255',
             'published_year' => 'required|integer',
             'category_id' => 'required|integer|exists:categories,id',
-            'book_image' => 'sometimes|file|image|max:10000', 
-            'pdf' => 'nullable|file|mimes:pdf|max:2048', 
+            'book_image' => 'sometimes|file|image|max:10000',
+            'pdf' => 'nullable|file|mimes:pdf|max:2048',
             'booktype' => 'required|string|max:255',
         ]);
     }
-    public function destroy($id){
-       
-        $book = Book::find($id);
+    // public function destroy($id){
+
+    //     $book = Book::find($id);
+    //     $book->delete();
+    //     return redirect('category');
+    //    }
+
+    public function softDelete($id)
+    {
+        $book = book::find($id);
         $book->delete();
-        return redirect('category');
-       }
+
+        return redirect()->back();
+    }
+
+    public function restore()
+    {
+        $book = Book::onlyTrashed()->restore();
     
+        // $book->restore();
+
+
+        return redirect()->back();
+    }
+ public function forceDelete($id){
+$book= book::find($id);
+ $book->forceDelete();
+ return redirect()->back();
+  }
+        
+
 }

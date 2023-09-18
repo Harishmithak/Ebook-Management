@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('pdf')->nullable();
             $table->string('booktype');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

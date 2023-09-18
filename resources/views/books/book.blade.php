@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
+
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addBookModal" style='margin-left:1252px'>
         Add Book
     </button>
+
 
     <div class="container">
         <table class="table table-bordered">
@@ -17,6 +19,9 @@
                     <th>Book Type</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Force delete</th>
+                
+               
                 </tr>
             </thead>
             <tbody>
@@ -48,12 +53,22 @@
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
-
+                        <td>
+                            <form action="{{ route('books.delete', $book->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"> Force Delete</button>
+                            </form>
+                        </td>
+                       
                     </tr>
+                    <a href="{{ route('books.restore') }}" class="btn btn-primary">Restore All</a>
                 @endforeach
             </tbody>
         </table>
-
+        <div class="col-12 d-flex justify-content-center pt-5">
+            {{$books->links()}}
+            </div>
 
     </div>
 
@@ -120,6 +135,7 @@
         </div>
     </div>
 
+        
     <style>
         .book-item {
             margin-bottom: 20px;
@@ -131,6 +147,32 @@
     <script>
         $(document).ready(function() {
             $('[data-toggle="modal"]').modal();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="modal"]').modal();
+    
+         
+            $('form').submit(function(event) {
+                event.preventDefault(); 
+    
+                const form = this; 
+    
+                Swal.fire({
+                    title: 'Are you sure?',
+                    // text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
         });
     </script>
 @endsection
