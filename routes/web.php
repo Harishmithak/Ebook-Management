@@ -53,6 +53,6 @@ Route::get('subscribeform', function () {
 Route::post('/subscription/create', 'App\Http\Controllers\SubscriptionController@subscribe')->name('subscription.subscribe');
 Route::delete('/books/fd/{id}','App\Http\Controllers\BooksController@forceDelete')->name('books.delete');
 // Route::post('books/restore/{id}', 'App\Http\Controllers\BooksController@restore')->name('books.restore');
+//   Route::get('/subscribeform', 'App\Http\Controllers\SubscriptionController@index');
 
-//  Route::get('/subscribeform', 'App\Http\Controllers\SubscriptionController@index');
-
+Route::any('/error', 'BooksController@error')->name('error');

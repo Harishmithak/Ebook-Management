@@ -21,10 +21,7 @@ class SubscriptionController extends Controller
     {
        
         $user = auth()->user();
-        Subscription::where('user_id', $user->id)
-        ->whereDate('expires_at', '=', now()->toDateString())
-        ->delete();
-        redirect()->back();
+   
         if ($user->isSubscribed()) {
             return redirect()->back()->with('info', 'You are already subscribed.');
         }

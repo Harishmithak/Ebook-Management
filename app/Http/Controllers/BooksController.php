@@ -66,7 +66,10 @@ class BooksController extends Controller
         }
 
         $book = book::create($validatedData);
-        session()->flash('success', 'Book created successfully.');
+        // if (!$book) {
+           
+        //     return redirect()->route('error');
+        // }
     }
 
 
