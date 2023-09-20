@@ -11,7 +11,7 @@
       <div class="input-group">
           <input type="text" name="query" class="form-control" placeholder="Search categories">
           <div class="input-group-append">
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="submit" class="btn search"><i class="fa-solid fa-magnifying-glass"></i></button>
           </div>
       </div>
   </form>
@@ -30,6 +30,9 @@
 </div>
 </body>
 <style>
+  .search{
+    background: #0D6E6E;
+  }
     .card-img {
     width: 100%;
     height: 15vw;

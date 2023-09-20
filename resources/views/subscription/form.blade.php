@@ -137,7 +137,7 @@ background: linear-gradient(0deg, rgba(255,27,0,1) 0%, rgba(251,75,2,1) 100%);
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card ">
                     <div class="card-header">Subscribe</div>
                     <div class="card-body">
                         @if (auth()->user()->isSubscribed())
@@ -186,6 +186,9 @@ background: linear-gradient(0deg, rgba(255,27,0,1) 0%, rgba(251,75,2,1) 100%);
     .subscribe{
     background-color: #0D1F2D;
    
+}
+.card{
+    margin-top: 100px;
 }
 
  .custom-btn {
