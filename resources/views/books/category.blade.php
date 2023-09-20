@@ -7,7 +7,14 @@
     <h1>
          
     </h1>
-    
+    <form action="{{ route('search') }}" method="GET" class="mb-4">
+      <div class="input-group">
+          <input type="text" name="query" class="form-control" placeholder="Search categories">
+          <div class="input-group-append">
+              <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+      </div>
+  </form>
     <div class="row">
         @foreach($categories as $category)
      <div class="col-md-4 mb-4">

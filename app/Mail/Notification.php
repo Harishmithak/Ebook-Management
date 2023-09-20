@@ -18,9 +18,10 @@ class Notification extends Mailable
      *
      * @return void
      */
+   
     public function __construct()
     {
-        //
+       
     }
 
     /**

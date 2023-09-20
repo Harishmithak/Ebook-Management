@@ -10,23 +10,23 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\premiumcategory;
 use App\Models\Subscription;
-
+use Illuminate\Support\Facades\DB;
 class BooksController extends Controller
 {
     public function index()
     {
-        $categories = category::all();
-        // $books = book::all();
+        $categories = DB::select('CALL GetAllCategories()');
+        $books = book::all();
 
-        $books = book::paginate(1);
+        // $books = book::paginate(2);
         return view('books.category', compact('categories', 'books'));
     }
     public function index1()
     {
 
-        $categories = category::all();
+        $categories = DB::select('CALL GetAllCategories()');
         // $books = book::all();
-        $books = book::paginate(1);
+        $books = book::paginate(2);
         return view('books.book', compact('books', 'categories'));
     }
 
@@ -34,8 +34,7 @@ class BooksController extends Controller
     public function show($category_id)
     {
         $category = category::find($category_id);
-        $categories = category::all();
-
+        $categories = DB::select('CALL GetAllCategories()');
         $books = Book::where('category_id', $category_id)
             ->get();
 
@@ -76,7 +75,7 @@ class BooksController extends Controller
     public function edit($id)
     {
         $book = book::find($id);
-        $categories = category::all();
+        $categories = DB::select('CALL GetAllCategories()');
 
         return view('books.edit', compact('book', 'categories'));
     }
@@ -146,6 +145,11 @@ $book= book::find($id);
  $book->forceDelete();
  return redirect()->back();
   }
-        
+  public function search(Request $request)
+  {
+      $query = $request->input('query');
+      $categories = Category::where('category_name', 'like', '%' . $query . '%')->get();
+      return view('books.category', ['categories' => $categories, 'query' => $query]);
+  }  
 
 }

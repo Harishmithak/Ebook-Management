@@ -56,3 +56,6 @@ Route::delete('/books/fd/{id}','App\Http\Controllers\BooksController@forceDelete
 //   Route::get('/subscribeform', 'App\Http\Controllers\SubscriptionController@index');
 
 Route::any('/error', 'BooksController@error')->name('error');
+Route::post('/payment_initiate_request','App\Http\Controllers\SubscriptionController@Initiate');
+Route::post('/payment-complete','App\Http\Controllers\SubscriptionController@complete');
+Route::get('/search', 'App\Http\Controllers\BooksController@search')->name('search');

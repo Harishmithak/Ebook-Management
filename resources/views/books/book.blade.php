@@ -25,6 +25,7 @@
                 </tr>
             </thead>
             <tbody>
+                <a href="{{ route('books.restore') }}" class="btn btn-primary">Restore All</a>
                 @foreach ($books as $book)
                     <tr>
                         <td>
@@ -62,7 +63,7 @@
                         </td>
                        
                     </tr>
-                    <a href="{{ route('books.restore') }}" class="btn btn-primary">Restore All</a>
+                  
                 @endforeach
             </tbody>
         </table>
