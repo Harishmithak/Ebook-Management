@@ -23,7 +23,7 @@ Auth::routes([
     "verify" => true,
 ]);
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('category',[BooksController::class,'index']);
 
@@ -59,3 +59,6 @@ Route::any('/error', 'BooksController@error')->name('error');
 Route::post('/payment_initiate_request','App\Http\Controllers\SubscriptionController@Initiate');
 Route::post('/payment-complete','App\Http\Controllers\SubscriptionController@complete');
 Route::get('/search', 'App\Http\Controllers\BooksController@search')->name('search');
+Route::get('/aboutus', function () {
+    return view('aboutus');
+});

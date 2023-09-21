@@ -9,7 +9,7 @@ use App\Models\category;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Razorpay\Api\Api;
-
+use App\Events\SubscriptionConfirmed;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -77,7 +77,7 @@ class SubscriptionController extends Controller
         $data = [
             'start_date' => $subscription->subscribed_at->format('Y-m-d'),
             'expires_at' => $subscription->expires_at->format('Y-m-d'),
-            'name'=>$subscription->name,
+            'email' => $user->email,
         ];
 
 
@@ -89,19 +89,10 @@ class SubscriptionController extends Controller
             Mail::to($user->email)->send(new Notification());
         }
 
-        Mail::to($user->email)->send(new SubscriptionConfirmation($data));
-        return redirect('category');
+        // Mail::to($user->email)->send(new SubscriptionConfirmation($data));
+        event(new SubscriptionConfirmed($data));
+         return redirect('category');  
     }
-
-
-
-
-
-
-
-
-
-
 }
 // public function subscribe(Request $request)
 // {
@@ -127,12 +118,9 @@ class SubscriptionController extends Controller
 //         'start_date' => $subscription->subscribed_at->format('Y-m-d'),
 //         'expires_at' => $subscription->expires_at->format('Y-m-d'),
 //     ];
-
-
 //     if ($subscription->expires_at <= now()) {
 //         Mail::to($user->email)->send(new Notification());
 //     }
-
 //     Mail::to($user->email)->send(new SubscriptionConfirmation($data));
 //     return redirect('category');
 // }
