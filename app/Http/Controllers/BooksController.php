@@ -17,9 +17,12 @@ class BooksController extends Controller
     {
         $categories = DB::select('CALL GetAllCategories()');
         $books = book::all();
-
-        // $books = book::paginate(2);
-        return view('books.category', compact('categories', 'books'));
+        // if (is_array($categories) && count($categories) > 0 && $books->count() > 0) {
+        //     return view('books.category', compact('categories', 'books'));
+        // } else {
+        //     return view('norecords');
+        // }
+       return view('books.category', compact('categories', 'books'));
     }
     public function index1()
     {
@@ -33,6 +36,7 @@ class BooksController extends Controller
 
     public function show($category_id)
     {
+       
         $category = category::find($category_id);
         $categories = DB::select('CALL GetAllCategories()');
         $books = Book::where('category_id', $category_id)
@@ -40,6 +44,7 @@ class BooksController extends Controller
 
 
         return view('books.userbook', compact('books', 'categories'));
+
     }
 
 
@@ -65,10 +70,7 @@ class BooksController extends Controller
         }
 
         $book = book::create($validatedData);
-        // if (!$book) {
-           
-        //     return redirect()->route('error');
-        // }
+     
     }
 
 

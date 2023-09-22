@@ -52,8 +52,7 @@ Route::get('subscribeform', function () {
 });
 Route::post('/subscription/create', 'App\Http\Controllers\SubscriptionController@subscribe')->name('subscription.subscribe');
 Route::delete('/books/fd/{id}','App\Http\Controllers\BooksController@forceDelete')->name('books.delete');
-// Route::post('books/restore/{id}', 'App\Http\Controllers\BooksController@restore')->name('books.restore');
-//   Route::get('/subscribeform', 'App\Http\Controllers\SubscriptionController@index');
+
 
 Route::any('/error', 'BooksController@error')->name('error');
 Route::post('/payment_initiate_request','App\Http\Controllers\SubscriptionController@Initiate');
@@ -62,3 +61,9 @@ Route::get('/search', 'App\Http\Controllers\BooksController@search')->name('sear
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
+Route::get('error', function () {
+    return view('errors.common_error');
+})->name('error');
+Route::get('norecord', function () {
+    return view('errors.no_records');
+})->name('norecord');

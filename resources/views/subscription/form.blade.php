@@ -18,9 +18,12 @@
                 <div class="card ">
                     <div class="card-header">Subscribe</div>
                     <div class="card-body">
-                        @if (auth()->user()->isSubscribed())
+                        @if (!auth()->check())
+                        <p>Please login to subscribe.</p>
+                    @elseif (auth()->user()->isSubscribed())
+                        <p>You are already subscribed.</p>
                             <p>You are already subscribed.</p>
-                            {{-- <p>Your subscription will start on {{ $subscription->subscribed_at->format('Y-m-d') }} and end on {{ $subscription->expires_at->format('Y-m-d') }}.</p> --}}
+                           
                         @else
                             <h5 class="card-title">Do Subscribe to access our premium books!!</h5> 
                             <p>Subscription Amount:₹200</p>
@@ -30,6 +33,9 @@
         <button type="submit" class="custom-btn btn-5">Subscribe</button>
         @csrf
     </form>
+
+
+    
     @endif
 </div>
 </div>

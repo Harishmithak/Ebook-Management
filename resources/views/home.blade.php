@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- @auth
-@if (!auth()) --}}
+<head>
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    @vite(['resources/css/app.css'])
+
+</head>
+
+
     <body class="main-home">
         <div class="container">
-            <div class="row" id="main-row">
-                <div class="col-6">
+            <div class="row gy-4" id="main-row">
+                <div class="col-md-6">
                     {{-- <img id="main-img" src="{{ asset('images/book-img-1.png') }}"alt="Image"> --}}
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-indicators">
@@ -38,9 +43,9 @@
                 </button> --}}
                     </div>
                 </div>
-                <div class="col-6" id="main-sec-col">
-          <p>"Ebooks:Where words  come to
-                    life anywhere."</p>
+                <div class="col-md-6" id="main-sec-col">
+                    <p>"Ebooks:Where words come to
+                        life anywhere."</p>
                 </div>
             </div>
 
@@ -49,85 +54,12 @@
 
 
 
-            
+
         </div>
-        
-    
+
+
     </body>
-    {{-- @endif
-@endauth --}}
+
 @endsection
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@1,700&display=swap');
 
-    body {
-        overflow-x: hidden;
-    }
-
-    .main-home {
-        background-color: #95d1c2 !important;
-
-    }
-
-    #main-sec-col {
-        font-family: 'Space Mono', monospace;
-        font-size: 40px;
-        color: rgb(15, 15, 15);
-        text-align: center;
-    }
-
-    #main-row {
-        margin-top: 5em;
-        position: absolute;
-        z-index: 1;
-        align-items: center;
-    }
-
-    #main-img {
-
-        width: 100%;
-        height: 85%;
-    }
-
-
-    .navbar {
-        background-color: burlywood;
-    }
-
-    .sidebar {
-        color: black;
-        height: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
-
-    }
-
-    .sidebar h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .sidebar ul li {
-        margin-bottom: 10px;
-    }
-
-    .sidebar ul li a {
-        text-decoration: none;
-        color: black;
-        font-size: 16px;
-        display: block;
-        transition: color 0.3s ease;
-
-
-    }
-
-    .sidebar ul li a:hover {
-        color: #ffcc00;
-    }
-</style>

@@ -49,7 +49,7 @@
 <body>
     <div class="error-container">
         <h1>Error 404</h1>
-        <p>Oops! The page you are looking for could not be found.</p>
+        <p>Oops! .</p>
         <a href="#" class="button" id="goBack">Go Back</a>
     </div>
 
