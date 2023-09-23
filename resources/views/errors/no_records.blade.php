@@ -23,7 +23,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
         h1 {
-            color: #e74c3c;
+            color: #230fdb;
             font-size: 60px;
         }
         p {
@@ -34,7 +34,7 @@
         .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #e74c3c;
+            background-color: #230fdb;
             color: #fff;
             font-size: 18px;
             text-decoration: none;
@@ -42,14 +42,14 @@
             transition: background-color 0.3s;
         }
         .button:hover {
-            background-color: #c0392b;
+            background-color: #230fdb;
         }
     </style>
 </head>
 <body>
     <div class="error-container">
         <h1>Error 404</h1>
-        <p>Oops! .</p>
+        <p>Oops! . No Records Found.</p>
         <a href="#" class="button" id="goBack">Go Back</a>
     </div>
 

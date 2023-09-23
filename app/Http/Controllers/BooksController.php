@@ -11,19 +11,21 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\premiumcategory;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\DB;
+
 class BooksController extends Controller
 {
     public function index()
     {
-        $categories = DB::select('CALL GetAllCategories()');
+        // $categories = DB::select('CALL GetAllCategories()');
+        $categories = category::all();
         $books = book::all();
-        // if (is_array($categories) && count($categories) > 0 && $books->count() > 0) {
-        //     return view('books.category', compact('categories', 'books'));
-        // } else {
-        //     return view('norecords');
-        // }
-       return view('books.category', compact('categories', 'books'));
+        if (!empty($categories)) {
+            return view('books.category', compact('categories', 'books'));
+        } else {
+            return view('errors.no_records');
+        }
     }
+
     public function index1()
     {
 
@@ -36,22 +38,18 @@ class BooksController extends Controller
 
     public function show($category_id)
     {
-       
         $category = category::find($category_id);
         $categories = DB::select('CALL GetAllCategories()');
         $books = Book::where('category_id', $category_id)
             ->get();
-
-
-        return view('books.userbook', compact('books', 'categories'));
-
+            if ($books->count() === 0) {       
+                return view('errors.no_records');
+            }
+       return view('books.userbook', compact('books', 'categories'));
     }
-
-
 
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
@@ -68,20 +66,25 @@ class BooksController extends Controller
         if ($request->hasFile('pdf')) {
             $validatedData['pdf'] = $request->file('pdf')->store('pdfs', 'public');
         }
-
         $book = book::create($validatedData);
-     
     }
 
-
+    // public function edit($id)
+    // {
+    //     $book = book::find($id);
+    //     $categories = DB::select('CALL GetAllCategories()');
+    //     return view('books.edit', compact('book', 'categories'));
+    // }
     public function edit($id)
     {
         $book = book::find($id);
+        if (!$book) {
+            return view('errors.no_records');
+        }
         $categories = DB::select('CALL GetAllCategories()');
-
         return view('books.edit', compact('book', 'categories'));
     }
-
+    
 
     public function update(Request $request, $id)
     {
@@ -118,40 +121,30 @@ class BooksController extends Controller
             'booktype' => 'required|string|max:255',
         ]);
     }
-    // public function destroy($id){
-
-    //     $book = Book::find($id);
-    //     $book->delete();
-    //     return redirect('category');
-    //    }
 
     public function softDelete($id)
     {
         $book = book::find($id);
         $book->delete();
-
         return redirect()->back();
     }
 
     public function restore()
     {
         $book = Book::onlyTrashed()->restore();
-    
-        // $book->restore();
-
-
         return redirect()->back();
     }
- public function forceDelete($id){
-$book= book::find($id);
- $book->forceDelete();
- return redirect()->back();
-  }
-  public function search(Request $request)
-  {
-      $query = $request->input('query');
-      $categories = Category::where('category_name', 'like', '%' . $query . '%')->get();
-      return view('books.category', ['categories' => $categories, 'query' => $query]);
-  }  
+    public function forceDelete($id)
+    {
+        $book = book::find($id);
+        $book->forceDelete();
+        return redirect()->back();
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $categories = Category::where('category_name', 'like', '%' . $query . '%')->get();
+        return view('books.category', ['categories' => $categories, 'query' => $query]);
+    }
 
 }

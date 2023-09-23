@@ -12,11 +12,8 @@
                     data-target="#addBookModal">
                     Add Book <i class="fa-solid fa-plus"></i>
                 </button>
-
             </div>
         </div>
-
-
         <div class="container mt-3">
             <table class="table table-bordered">
                 <thead>
@@ -31,8 +28,6 @@
                         <th>Edit</th>
                         <th>Delete</th>
                         <th>Force delete</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
